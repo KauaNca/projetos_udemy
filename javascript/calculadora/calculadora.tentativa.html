@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eu fazendo</title>
+    <link rel="stylesheet" href="calculadora.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.0.0/math.min.js">
+
+
+
+    </script>
+</head>
+
+<body>
+    <div id="calculo">
+        <h1>Calculadora</h1>
+        <div id="visor">
+            <input type="text" disabled>
+        </div>
+        <div class="teclas">
+            <button style="background-color: brown; color:white;" type="button"
+                onclick="calculadora('sinal', 'C')">C</button>
+            <button type="button" onclick="calculadora('sinal', '+')">+</button>
+            <button type="button" onclick="calculadora('sinal', '-')">-</button>
+            <button type="button" onclick="calculadora('sinal', '*')">*</button>
+            <button type="button" onclick="calculadora('sinal', '/')">/</button>
+        </div>
+        <div class="teclas">
+            <button type="button" onclick="calculadora('numero', '1')">1</button>
+            <button type="button" onclick="calculadora('numero', '2')">2</button>
+            <button type="button" onclick="calculadora('numero', '3')">3</button>
+            <button type="button" onclick="calculadora('numero', '4')">4</button>
+            <button type="button" onclick="calculadora('numero', '5')">5</button>
+        </div>
+        <div class="teclas">
+            <button type="button" onclick="calculadora('numero', '6')">6</button>
+            <button type="button" onclick="calculadora('numero', '7')">7</button>
+            <button type="button" onclick="calculadora('numero', '8')">8</button>
+            <button type="button" onclick="calculadora('numero', '9')">9</button>
+            <button type="button" onclick="calculadora('numero', '0')">0</button>
+        </div>
+        <div class="teclas">
+            <button style="background-color: green;
+            color: white;" type="button" onclick="calculadora('sinal','=')">=</button>
+        </div>
+    </div>
+    <script>
+        //forma com eval() -> considerada não segura
+        /*function calculadora(tipo, valor) {
+            let visor = document.querySelector('#visor input');
+            if (tipo == 'numero') {
+                visor.value += valor; // Corrigido para adicionar o valor como string
+            }
+            else if (tipo == 'sinal') {
+                if (valor == 'C') {
+                    visor.value = "";
+                }
+                else if (valor == '=') {
+                    try {
+                        let resultado = eval(visor.value);
+                        if (isNaN(resultado)) { // Checa se o resultado é NaN
+                            visor.value = "ERRO!";
+                        }
+                        else {
+                            visor.value = resultado;
+                        }
+                    } catch (e) {
+                        visor.value = "ERRO!"; // Trata qualquer erro gerado pelo eval
+                    }
+                }
+                else {
+                    visor.value += valor; // Adiciona o sinal ao visor
+                }
+            }
+        }*/
+        //forma com math.evaluete() -> esse método para ser usado precisa trazer um script de fora
+        function calculadora(tipo, valor) {
+            let visor = document.querySelector('#visor input');
+            if (tipo == 'numero') {
+                visor.value += valor;
+            } else if (tipo == 'sinal') {
+                if (valor == 'C') {
+                    visor.value = "";
+                } else if (valor == '=') {
+                    try {
+                        let resultado = math.evaluate(visor.value);
+                        visor.value = resultado;
+                    } catch (e) {
+                        visor.value = "ERRO!";
+                    }
+                } else {
+                    visor.value += valor;
+                }
+            }
+        }
+    </script>
+
+
+
+</html>
